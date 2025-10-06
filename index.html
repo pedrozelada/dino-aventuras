@@ -21,6 +21,7 @@
       background-size: cover;
       background-position: center bottom;
       background-repeat: no-repeat;
+      z-index: 1; 
     }
     .jungle-bg {
       position: absolute;
@@ -35,7 +36,7 @@
       left: -20%;
       width: 190px;
       height: 120px;
-      z-index: 50;
+      z-index: 1000; 
       opacity: 0;
       background-image: url('public/images/pterodactyls_group1.png');
       background-size: contain;
@@ -45,7 +46,7 @@
       position: absolute;
       top: 20px;
       left: 20px;
-      z-index: 10;
+      z-index: 100; 
       opacity: 0;
       transform: translateX(-100px);
     }
@@ -63,8 +64,9 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      z-index: 5;
+      z-index: 50; 
       opacity: 0;
+      position: relative; 
     }
     .stone-arch {
       position: relative;
@@ -105,7 +107,7 @@
     .dino {
       position: absolute;
       font-size: 4em;
-      z-index: 20;
+      z-index: 60; /* Reducido */
       opacity: 0;
       cursor: pointer; /* Indicar que el dinosaurio es clickable */
     }
@@ -122,10 +124,12 @@
   </style>
 </head>
 <body>
+  <!-- El pterodáctilo ahora está FUERA del background para tener mayor control -->
+  <div class="pterodactyls"></div>
+  
   <div class="background">
     <div class="jungle-bg"></div>
     <div class="volcano-smoke"></div>
-    <div class="pterodactyls"></div>
   </div>
 
   <header class="logo-area">
