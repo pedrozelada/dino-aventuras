@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dino-Aventuras - Menú Principal</title>
+    <style>
+        /* Pega este código dentro de las etiquetas <style> del HTML */
+body {
+    margin: 0;
+    overflow: hidden; /* Ocultar barras de desplazamiento */
+    font-family: 'Arial', sans-serif;
+    color: white;
+}
+
+/* --- Fondo de Jungla (Estático para el CSS) --- */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, #3A7338, #FF8C6B); /* Jungla a atardecer */
+}
+.jungle-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* Simula hojas o texturas en el fondo */
+    background: radial-gradient(circle at bottom, rgba(0,0,0,0.3) 0%, transparent 50%), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="rgba(0,50,0,0.2)" width="100" height="100"/><circle fill="rgba(0,100,0,0.3)" cx="50" cy="50" r="10"/></svg>');
+    opacity: 0.8;
+}
+
+/* --- Estilo del Logo --- */
+.logo-area {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    /* Inicio de la animación: invisible y fuera de posición */
+    opacity: 0;
+    transform: translateX(-100px); 
+}
+.logo-text {
+    background-color: #55A83E;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 2em;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0 #326B24;
+}
+
+/* --- Estilo del Contenedor Principal del Menú --- */
+.menu-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    z-index: 5;
+    /* Inicio de la animación: invisible y en el centro */
+    opacity: 0;
+}
+
+/* --- Estilo del Arco y el Menú --- */
+.stone-arch {
+    position: relative;
+    background-color: #A0835F; /* Color base de la piedra */
+    padding: 20px 40px 60px;
+    border: 15px solid #4C6A48; /* Musgo en el borde */
+    border-radius: 40px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+.menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 300px;
+    opacity: 0; /* Lo hacemos invisible para que GSAP lo revele */
+}
+.menu-item {
+    padding: 15px 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s; /* Transición para el efecto hover */
+    /* Inicio de la animación: fuera de la pantalla */
+    transform: translateX(-500px); 
+}
+.menu-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Colores de los botones */
+#item-rompecabezas { background-color: #55C455; }
+#item-aprender { background-color: #4A90E2; }
+#item-videos { background-color: #E64C3C; }
+#item-estadisticas { background-color: #9B59B6; }
+#item-autenticacion { background-color: #34495E; }
+
+/* --- Dinosaurios (¡Usa emojis para un inicio rápido!) --- */
+.dino {
+    position: absolute;
+    font-size: 4em; 
+    z-index: 20;
+    opacity: 0; /* Ocultos para la animación */
+}
+.t-rex {
+    top: -80px;
+    right: -40px;
+    transform: rotate(10deg);
+}
+.triceratops {
+    bottom: -60px;
+    left: -60px;
+    transform: rotate(-15deg);
+}
+.pterodactyls {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    font-size: 2em;
+    opacity: 0;
+}
+    </style>
+</head>
+<body>
+
+    <div class="background">
+        <div class="jungle-bg"></div>
+        <div class="volcano-smoke"></div>
+        <div class="pterodactyls"></div>
+    </div>
+
+    <header class="logo-area">
+        <h1 class="logo-text">DINO-AVENTURAS</h1>
+    </header>
+
+    <div class="menu-container">
+        <div class="stone-arch">
+            <div class="dino t-rex">🦖</div>
+            <div class="dino triceratops">🦕</div>
+
+            <div class="menu-list">
+                <a href="#" class="menu-item" id="item-rompecabezas">🧩 Rompecabezas</a>
+                <a href="#" class="menu-item" id="item-aprender">📚 Aprender</a>
+                <a href="#" class="menu-item" id="item-videos">▶️ Videos</a>
+                <a href="#" class="menu-item" id="item-estadisticas">📊 Estadísticas</a>
+                <a href="#" class="menu-item" id="item-autenticacion">🔒 Autenticación</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+        // Pega este código dentro de las etiquetas <script> del HTML
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Crear la línea de tiempo principal
+    const tl = gsap.timeline({
+        defaults: { duration: 1, ease: "power3.out" }
+    });
+
+    // 2. Animación de Entrada General
+    tl
+    .to(".menu-container", { duration: 1.5, opacity: 1 }, 0) // Hacer visible el contenedor del menú
+    .to(".logo-area", { opacity: 1, x: 0 }, 0.5) // Deslizar y aparecer el logo
+
+    // 3. Animación de los Botones del Menú (Secuencia)
+    // Usamos 'stagger' para que los botones entren uno tras otro
+    .to(".menu-item", { x: 0, opacity: 1, stagger: 0.1 }, 1) // Iniciar después de 1 segundo
+
+    // 4. Animación de los Dinosaurios (Aparecer)
+    .to(".dino", { opacity: 1, scale: 1, ease: "back.out(1.7)" }, 1.5) // Aparecen rebotando
+
+    // 5. Animación continua (Loop)
+    // Crear una animación secundaria para un loop infinito y sutil en el fondo
+    gsap.to(".jungle-bg", {
+        rotation: 3,
+        scale: 1.05,
+        duration: 8,
+        ease: "sine.inOut",
+        yoyo: true, // Ir y volver
+        repeat: -1 // Repetición infinita
+    });
+});
+    </script>
+</body>
+</html>
