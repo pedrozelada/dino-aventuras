@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tl
     .to(".menu-container", { duration: 1.5, opacity: 1 }, 0) // Hacer visible el contenedor del menú
     .to(".logo-area", { opacity: 1, x: 0 }, 0.5) // Deslizar y aparecer el logo
-
+    .to(".menu-list", { opacity: 1 }, 0.9)
     // 3. Animación de los Botones del Menú (Secuencia)
     // Usamos 'stagger' para que los botones entren uno tras otro
     .to(".menu-item", { x: 0, opacity: 1, stagger: 0.1 }, 1) // Iniciar después de 1 segundo
