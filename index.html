@@ -1,234 +1,207 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dino-Aventuras - Menú Principal</title>
-    <style>
-        /* Pega este código dentro de las etiquetas <style> del HTML */
-body {
-    margin: 0;
-    overflow: hidden; /* Ocultar barras de desplazamiento */
-    font-family: 'Arial', sans-serif;
-    color: white;
-}
-
-/* Pega este código dentro de las etiquetas <style> del HTML */
-
-/* --- Fondo de Jungla (Usando una imagen conceptual) --- */
-.background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    
-    /* ¡CAMBIO CLAVE! Usando la imagen de fondo de tu carpeta */
-    background-image: url('public/images/jungle_background.png'); 
-    background-size: cover; 
-    background-position: center bottom; 
-    background-repeat: no-repeat;
-}
-.jungle-bg {
-    /* Mantenemos el efecto sutil de la jungla oscura por encima del fondo */
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at bottom, rgba(0,0,0,0.3) 0%, transparent 50%);
-    opacity: 0.8;
-}
-
-/* --- Estilo de los Pterosaurios --- */
-.pterodactyls {
-    position: absolute;
-    top: 10%; 
-    left: -20%; 
-    width: 150px; /* Tamaño del grupo de pterosaurios */
-    height: 80px; 
-    z-index: 1; 
-    opacity: 0; /* Oculto para la animación inicial */
-
-    /* ¡CAMBIO CLAVE! Usando la imagen de pterosaurios */
-    background-image: url('public/images/pterodactyls_group.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-/* --- Estilo del Logo --- */
-.logo-area {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 10;
-    /* Inicio de la animación: invisible y fuera de posición */
-    opacity: 0;
-    transform: translateX(-100px); 
-}
-.logo-text {
-    background-color: #55A83E;
-    padding: 10px 15px;
-    border-radius: 10px;
-    font-size: 2em;
-    font-weight: bold;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 0 #326B24;
-}
-
-/* --- Estilo del Contenedor Principal del Menú --- */
-.menu-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    z-index: 5;
-    /* Inicio de la animación: invisible y en el centro */
-    opacity: 0;
-}
-
-/* --- Estilo del Arco y el Menú --- */
-.stone-arch {
-    position: relative;
-    background-color: #A0835F; /* Color base de la piedra */
-    padding: 20px 40px 60px;
-    border: 15px solid #4C6A48; /* Musgo en el borde */
-    border-radius: 40px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-}
-.menu-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 300px;
-    opacity: 0; /* Lo hacemos invisible para que GSAP lo revele */
-}
-.menu-item {
-    padding: 15px 20px;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 1.2em;
-    font-weight: bold;
-    text-decoration: none;
-    color: white;
-    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s, box-shadow 0.2s; /* Transición para el efecto hover */
-    /* Inicio de la animación: fuera de la pantalla */
-    transform: translateX(-500px); 
-}
-.menu-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 7px 0 rgba(0, 0, 0, 0.2);
-}
-
-/* Colores de los botones */
-#item-rompecabezas { background-color: #55C455; }
-#item-aprender { background-color: #4A90E2; }
-#item-videos { background-color: #E64C3C; }
-#item-estadisticas { background-color: #9B59B6; }
-#item-autenticacion { background-color: #34495E; }
-
-/* --- Dinosaurios (¡Usa emojis para un inicio rápido!) --- */
-.dino {
-    position: absolute;
-    font-size: 4em; 
-    z-index: 20;
-    opacity: 0; /* Ocultos para la animación */
-}
-.t-rex {
-    top: -80px;
-    right: -40px;
-    transform: rotate(10deg);
-}
-.triceratops {
-    bottom: -60px;
-    left: -60px;
-    transform: rotate(-15deg);
-}
-.pterodactyls {
-    position: absolute;
-    top: 50px;
-    right: 50px;
-    font-size: 2em;
-    opacity: 0;
-}
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dino-Aventuras - Menú Principal</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+      color: white;
+    }
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('public/images/jungle_background.png');
+      background-size: cover;
+      background-position: center bottom;
+      background-repeat: no-repeat;
+    }
+    .jungle-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at bottom, rgba(0,0,0,0.3) 0%, transparent 50%);
+      opacity: 0.8;
+    }
+    .pterodactyls {
+      position: absolute;
+      top: 10%;
+      left: -20%;
+      width: 190px;
+      height: 120px;
+      z-index: 50;
+      opacity: 0;
+      background-image: url('public/images/pterodactyls_group1.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .logo-area {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 10;
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    .logo-text {
+      background-color: #55A83E;
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-size: 2em;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 0 #326B24;
+    }
+    .menu-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      z-index: 5;
+      opacity: 0;
+    }
+    .stone-arch {
+      position: relative;
+      background-color: #A0835F;
+      padding: 20px 40px 60px;
+      border: 15px solid #4C6A48;
+      border-radius: 40px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    }
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 300px;
+      opacity: 0;
+    }
+    .menu-item {
+      padding: 15px 20px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: bold;
+      text-decoration: none;
+      color: white;
+      box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s, box-shadow 0.2s;
+      transform: translateX(-500px);
+    }
+    .menu-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 0 rgba(0, 0, 0, 0.2);
+    }
+    #item-rompecabezas { background-color: #55C455; }
+    #item-aprender { background-color: #4A90E2; }
+    #item-videos { background-color: #E64C3C; }
+    #item-estadisticas { background-color: #9B59B6; }
+    #item-autenticacion { background-color: #34495E; }
+    .dino {
+      position: absolute;
+      font-size: 4em;
+      z-index: 20;
+      opacity: 0;
+      cursor: pointer; /* Indicar que el dinosaurio es clickable */
+    }
+    .t-rex {
+      top: -80px;
+      right: -40px;
+      transform: rotate(10deg);
+    }
+    .triceratops {
+      bottom: -60px;
+      left: -60px;
+      transform: rotate(-15deg);
+    }
+  </style>
 </head>
 <body>
-
-   <div class="background">
-    <div class="jungle-bg"></div> 
+  <div class="background">
+    <div class="jungle-bg"></div>
     <div class="volcano-smoke"></div>
-    <div class="pterodactyls"></div> 
-</div>
-</div>
+    <div class="pterodactyls"></div>
+  </div>
 
-    <header class="logo-area">
-        <h1 class="logo-text">DINO-AVENTURAS</h1>
-    </header>
+  <header class="logo-area">
+    <h1 class="logo-text">DINO-AVENTURAS</h1>
+  </header>
 
-    <div class="menu-container">
-        <div class="stone-arch">
-            <div class="dino t-rex">🦖</div>
-            <div class="dino triceratops">🦕</div>
-
-            <div class="menu-list">
-                <a href="#" class="menu-item" id="item-rompecabezas">🧩 Rompecabezas</a>
-                <a href="#" class="menu-item" id="item-aprender">📚 Aprender</a>
-                <a href="#" class="menu-item" id="item-videos">▶️ Videos</a>
-                <a href="#" class="menu-item" id="item-estadisticas">📊 Estadísticas</a>
-                <a href="#" class="menu-item" id="item-autenticacion">🔒 Autenticación</a>
-            </div>
-        </div>
+  <div class="menu-container">
+    <div class="stone-arch">
+      <div class="dino t-rex">🦖</div>
+      <div class="dino triceratops">🦕</div>
+      <div class="menu-list">
+        <a href="#" class="menu-item" id="item-rompecabezas">🧩 Rompecabezas</a>
+        <a href="#" class="menu-item" id="item-aprender">📚 Aprender</a>
+        <a href="#" class="menu-item" id="item-videos">▶️ Videos</a>
+        <a href="#" class="menu-item" id="item-estadisticas">📊 Estadísticas</a>
+        <a href="#" class="menu-item" id="item-autenticacion">🔒 Autenticación</a>
+      </div>
     </div>
+  </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script>
-        // Pega este código dentro de las etiquetas <script> del HTML
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Crear la línea de tiempo principal
-    const tl = gsap.timeline({
+  <audio id="intro-sound" src="public/sounds/jurassic-dinosaurs-sound.mp3" preload="auto"></audio>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const introSound = document.getElementById("intro-sound");
+      const dinos = document.querySelectorAll(".dino");
+
+      // Agregar evento de clic a cada dinosaurio
+      dinos.forEach(dino => {
+        dino.addEventListener('click', () => {
+          introSound.currentTime = 0; // Reiniciar el audio al inicio
+          introSound.play().catch(e => console.log("Error al reproducir audio:", e));
+        });
+      });
+
+      // Animaciones
+      const tl = gsap.timeline({
         defaults: { duration: 1, ease: "power3.out" }
-    });
+      });
 
-    // 2. Animación de Entrada General
-    tl
-    .to(".menu-container", { duration: 1.5, opacity: 1 }, 0) // Hacer visible el contenedor del menú
-    .to(".logo-area", { opacity: 1, x: 0 }, 0.5) // Deslizar y aparecer el logo
-    .to(".menu-list", { opacity: 1 }, 0.9)
+      tl
+        .to(".menu-container", { duration: 1.5, opacity: 1 }, 0)
+        .to(".logo-area", { opacity: 1, x: 0 }, 0.5)
+        .to(".menu-list", { opacity: 1 }, 0.9)
+        .to(".menu-item", { x: 0, opacity: 1, stagger: 0.1 }, 1)
+        .to(".dino", { opacity: 1, scale: 1, ease: "back.out(1.7)" }, 1.5);
 
-    // 3. Animación de los Botones del Menú (Secuencia)
-    // Usamos 'stagger' para que los botones entren uno tras otro
-    .to(".menu-item", { x: 0, opacity: 1, stagger: 0.1 }, 1) // Iniciar después de 1 segundo
-
-    // 4. Animación de los Dinosaurios (Aparecer)
-    .to(".dino", { opacity: 1, scale: 1, ease: "back.out(1.7)" }, 1.5) // Aparecen rebotando
-
-    // 5. Animación continua (Loop)
-    // Crear una animación secundaria para un loop infinito y sutil en el fondo
-    gsap.to(".jungle-bg", {
+      gsap.to(".jungle-bg", {
         rotation: 3,
         scale: 1.05,
         duration: 8,
         ease: "sine.inOut",
-        yoyo: true, // Ir y volver
-        repeat: -1 // Repetición infinita
-    });
+        yoyo: true,
+        repeat: -1
+      });
 
-    // Pega este código dentro de las etiquetas <script> del HTML, después del código existente.
-
-    // Animación de vuelo continuo de los Pterosaurios
-    gsap.to(".pterodactyls", {
-        opacity: 1, // Hacerlos visibles
-        x: "140vw", // Moverlos 140% del ancho de la vista (para que crucen toda la pantalla)
-        duration: 15, // Velocidad del vuelo (más alto = más lento)
-        delay: 2, // Empezar después de que el menú haya entrado
-        ease: "none", // Movimiento lineal para un vuelo constante
-        repeat: -1, // Repetición infinita
-        onRepeat: () => {
-            // Al repetir, hacemos que vuelvan a empezar desde la izquierda
-            gsap.set(".pterodactyls", { x: "-20vw" }); 
-        }
+      function animatePterodactyls() {
+        const pterodactyls = document.querySelector(".pterodactyls");
+        gsap.set(pterodactyls, { x: "-20vw", y: "0vw", opacity: 0 });
+        const flightTimeline = gsap.timeline({
+          delay: -1,
+          repeat: -1,
+          repeatDelay: 3,
+          defaults: { ease: "power1.inOut", duration: 2 }
+        });
+        flightTimeline
+          .to(pterodactyls, { opacity: 1, duration: 1 })
+          .to(pterodactyls, { x: "20vw", y: "-5vw", duration: 3 })
+          .to(pterodactyls, { x: "50vw", y: "5vw", duration: 3 })
+          .to(pterodactyls, { x: "80vw", y: "0vw", duration: 3 })
+          .to(pterodactyls, { opacity: 0, duration: 1, ease: "power1.in" })
+          .set(pterodactyls, { x: "-20vw" });
+      }
+      animatePterodactyls();
     });
-});
-    </script>
+  </script>
 </body>
 </html>
