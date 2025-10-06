@@ -13,22 +13,45 @@ body {
     color: white;
 }
 
-/* --- Fondo de Jungla (Estático para el CSS) --- */
+/* Pega este código dentro de las etiquetas <style> del HTML */
+
+/* --- Fondo de Jungla (Usando una imagen conceptual) --- */
 .background {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to top, #3A7338, #FF8C6B); /* Jungla a atardecer */
+    
+    /* ¡CAMBIO CLAVE! Usando la imagen de fondo de tu carpeta */
+    background-image: url('public/images/jungle_background.png'); 
+    background-size: cover; 
+    background-position: center bottom; 
+    background-repeat: no-repeat;
 }
 .jungle-bg {
+    /* Mantenemos el efecto sutil de la jungla oscura por encima del fondo */
     position: absolute;
     width: 100%;
     height: 100%;
-    /* Simula hojas o texturas en el fondo */
-    background: radial-gradient(circle at bottom, rgba(0,0,0,0.3) 0%, transparent 50%), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="rgba(0,50,0,0.2)" width="100" height="100"/><circle fill="rgba(0,100,0,0.3)" cx="50" cy="50" r="10"/></svg>');
+    background: radial-gradient(circle at bottom, rgba(0,0,0,0.3) 0%, transparent 50%);
     opacity: 0.8;
+}
+
+/* --- Estilo de los Pterosaurios --- */
+.pterodactyls {
+    position: absolute;
+    top: 10%; 
+    left: -20%; 
+    width: 150px; /* Tamaño del grupo de pterosaurios */
+    height: 80px; 
+    z-index: 1; 
+    opacity: 0; /* Oculto para la animación inicial */
+
+    /* ¡CAMBIO CLAVE! Usando la imagen de pterosaurios */
+    background-image: url('public/images/pterodactyls_group.png');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 /* --- Estilo del Logo --- */
@@ -131,11 +154,12 @@ body {
 </head>
 <body>
 
-    <div class="background">
-        <div class="jungle-bg"></div>
-        <div class="volcano-smoke"></div>
-        <div class="pterodactyls"></div>
-    </div>
+   <div class="background">
+    <div class="jungle-bg"></div> 
+    <div class="volcano-smoke"></div>
+    <div class="pterodactyls"></div> 
+</div>
+</div>
 
     <header class="logo-area">
         <h1 class="logo-text">DINO-AVENTURAS</h1>
@@ -170,6 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .to(".menu-container", { duration: 1.5, opacity: 1 }, 0) // Hacer visible el contenedor del menú
     .to(".logo-area", { opacity: 1, x: 0 }, 0.5) // Deslizar y aparecer el logo
     .to(".menu-list", { opacity: 1 }, 0.9)
+
     // 3. Animación de los Botones del Menú (Secuencia)
     // Usamos 'stagger' para que los botones entren uno tras otro
     .to(".menu-item", { x: 0, opacity: 1, stagger: 0.1 }, 1) // Iniciar después de 1 segundo
@@ -186,6 +211,22 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: "sine.inOut",
         yoyo: true, // Ir y volver
         repeat: -1 // Repetición infinita
+    });
+
+    // Pega este código dentro de las etiquetas <script> del HTML, después del código existente.
+
+    // Animación de vuelo continuo de los Pterosaurios
+    gsap.to(".pterodactyls", {
+        opacity: 1, // Hacerlos visibles
+        x: "140vw", // Moverlos 140% del ancho de la vista (para que crucen toda la pantalla)
+        duration: 15, // Velocidad del vuelo (más alto = más lento)
+        delay: 2, // Empezar después de que el menú haya entrado
+        ease: "none", // Movimiento lineal para un vuelo constante
+        repeat: -1, // Repetición infinita
+        onRepeat: () => {
+            // Al repetir, hacemos que vuelvan a empezar desde la izquierda
+            gsap.set(".pterodactyls", { x: "-20vw" }); 
+        }
     });
 });
     </script>
