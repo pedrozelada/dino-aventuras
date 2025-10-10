@@ -1,0 +1,215 @@
+  body {
+      margin: 0;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+      color: white;
+    }
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('../images/jungle_background.png');
+      background-size: cover;
+      background-position: center bottom;
+      background-repeat: no-repeat;
+      z-index: 1; 
+    }
+    .jungle-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at bottom, rgba(0,0,0,0.3) 0%, transparent 50%);
+      opacity: 0.8;
+    }
+    .pterodactyls {
+      position: absolute;
+      top: 10%;
+      left: -20%;
+      width: 190px;
+      height: 120px;
+      z-index: 1000; 
+      opacity: 0;
+      background-image: url('../images/pterodactyls_group1.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .logo-area {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 100; 
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    .logo-text {
+      background-color: #55A83E;
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-size: 2em;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 0 #326B24;
+    }
+    .menu-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      z-index: 50; 
+      opacity: 0;
+      position: relative; 
+    }
+    .stone-arch {
+      position: relative;
+      background-color: #A0835F;
+      padding: 20px 40px 60px;
+      border: 15px solid #4C6A48;
+      border-radius: 40px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    }
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 300px;
+      opacity: 0;
+    }
+    .menu-item {
+      padding: 15px 20px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: bold;
+      text-decoration: none;
+      color: white;
+      box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s, box-shadow 0.2s;
+      transform: translateX(-500px);
+    }
+    .menu-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 0 rgba(0, 0, 0, 0.2);
+    }
+    #item-rompecabezas { background-color: #55C455; }
+    #item-aprender { background-color: #4A90E2; }
+    #item-videos { background-color: #E64C3C; }
+    #item-estadisticas { background-color: #9B59B6; }
+    #item-autenticacion { background-color: #34495E; }
+    .dino {
+      position: absolute;
+      font-size: 4em;
+      z-index: 60; /* Reducido */
+      opacity: 0;
+      cursor: pointer; /* Indicar que el dinosaurio es clickable */
+    }
+    .t-rex {
+      top: -80px;
+      right: -40px;
+      transform: rotate(10deg);
+    }
+    .triceratops {
+      bottom: -60px;
+      left: -60px;
+      transform: rotate(-15deg);
+    }
+
+    .puzzle-view {
+      text-align: center;
+      color: white;
+    }
+
+    #puzzle-container {
+      display: inline-grid;
+      border: 5px solid #4C6A48;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.2);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .piece {
+      background-repeat: no-repeat;
+      border-radius: 4px;
+      cursor: grab;
+      transition: transform 0.1s;
+    }
+
+    .piece:active {
+      transform: scale(1.05);
+    }
+
+    /* Agrega esto a tu style.css */
+
+    /* Agrega al style.css */
+.puzzle-controls {
+  margin: 15px 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.puzzle-controls select, .puzzle-controls button {
+  padding: 8px 15px;
+  border-radius: 5px;
+  border: none;
+  background: #3498db;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.puzzle-controls button {
+  background: #e74c3c;
+}
+
+.puzzle-controls select:hover, .puzzle-controls button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.puzzle-piece {
+  background-repeat: no-repeat;
+  border: 2px solid #34495e;
+  box-sizing: border-box;
+}
+
+.puzzle-piece:hover:not([data-empty="true"]) {
+  filter: brightness(1.1);
+  border-color: #f39c12;
+}
+
+.puzzle-piece[data-empty="true"] {
+  background-color: #2c3e50 !important;
+  border: 2px dashed #34495e;
+}
+
+.piece.dragging {
+  opacity: 0.5;
+  transform: scale(1.1);
+  z-index: 100;
+}
+
+.piece:hover {
+  filter: brightness(1.1);
+}
+
+#puzzle-container {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 5px;
+  border-radius: 8px;
+}
+
+#content-area {
+  position: relative;
+  z-index: 200; /* mayor que el menú y el fondo */
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6); /* opcional: da contraste */
+  backdrop-filter: blur(4px); /* opcional: efecto de desenfoque del fondo */
+}

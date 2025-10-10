@@ -4,124 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dino-Aventuras - Menú Principal</title>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      font-family: 'Arial', sans-serif;
-      color: white;
-    }
-    .background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('public/images/jungle_background.png');
-      background-size: cover;
-      background-position: center bottom;
-      background-repeat: no-repeat;
-      z-index: 1; 
-    }
-    .jungle-bg {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at bottom, rgba(0,0,0,0.3) 0%, transparent 50%);
-      opacity: 0.8;
-    }
-    .pterodactyls {
-      position: absolute;
-      top: 10%;
-      left: -20%;
-      width: 190px;
-      height: 120px;
-      z-index: 1000; 
-      opacity: 0;
-      background-image: url('public/images/pterodactyls_group1.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-    }
-    .logo-area {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      z-index: 100; 
-      opacity: 0;
-      transform: translateX(-100px);
-    }
-    .logo-text {
-      background-color: #55A83E;
-      padding: 10px 15px;
-      border-radius: 10px;
-      font-size: 2em;
-      font-weight: bold;
-      letter-spacing: 2px;
-      text-shadow: 2px 2px 0 #326B24;
-    }
-    .menu-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      z-index: 50; 
-      opacity: 0;
-      position: relative; 
-    }
-    .stone-arch {
-      position: relative;
-      background-color: #A0835F;
-      padding: 20px 40px 60px;
-      border: 15px solid #4C6A48;
-      border-radius: 40px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-    }
-    .menu-list {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      width: 300px;
-      opacity: 0;
-    }
-    .menu-item {
-      padding: 15px 20px;
-      border-radius: 10px;
-      text-align: center;
-      font-size: 1.2em;
-      font-weight: bold;
-      text-decoration: none;
-      color: white;
-      box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
-      transition: transform 0.2s, box-shadow 0.2s;
-      transform: translateX(-500px);
-    }
-    .menu-item:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 7px 0 rgba(0, 0, 0, 0.2);
-    }
-    #item-rompecabezas { background-color: #55C455; }
-    #item-aprender { background-color: #4A90E2; }
-    #item-videos { background-color: #E64C3C; }
-    #item-estadisticas { background-color: #9B59B6; }
-    #item-autenticacion { background-color: #34495E; }
-    .dino {
-      position: absolute;
-      font-size: 4em;
-      z-index: 60; /* Reducido */
-      opacity: 0;
-      cursor: pointer; /* Indicar que el dinosaurio es clickable */
-    }
-    .t-rex {
-      top: -80px;
-      right: -40px;
-      transform: rotate(10deg);
-    }
-    .triceratops {
-      bottom: -60px;
-      left: -60px;
-      transform: rotate(-15deg);
-    }
-  </style>
+  <link rel="stylesheet" href="public/styles/style.css">
+  
+  
 </head>
 <body>
   <!-- El pterodáctilo ahora está FUERA del background para tener mayor control -->
@@ -149,10 +34,14 @@
       </div>
     </div>
   </div>
+  <main id="content-area"></main>
+
 
   <audio id="intro-sound" src="public/sounds/jurassic-dinosaurs-sound.mp3" preload="auto"></audio>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const introSound = document.getElementById("intro-sound");
@@ -207,5 +96,6 @@
       animatePterodactyls();
     });
   </script>
+  <script type="module" src="public/scripts/main.js"></script>
 </body>
 </html>
